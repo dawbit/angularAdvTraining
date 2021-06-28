@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "projects": {
+    "waskoadv": {
+      "projectType": "application",
+      "root": "apps/waskoadv",
+      "sourceRoot": "apps/waskoadv/src",
+      "prefix": "wasko",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/waskoadv",
+            "index": "apps/waskoadv/src/index.html",
+            "main": "apps/waskoadv/src/main.ts",
+            "polyfills": "apps/waskoadv/src/polyfills.ts",
+            "tsConfig": "apps/waskoadv/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/waskoadv/src/favicon.ico",
+              "apps/waskoadv/src/assets"
+            ],
+            "styles": ["apps/waskoadv/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/waskoadv/src/environments/environment.ts",
+                  "with": "apps/waskoadv/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "waskoadv:build:production"
+            },
+            "development": {
+              "browserTarget": "waskoadv:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "waskoadv:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/waskoadv/src/**/*.ts",
+              "apps/waskoadv/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/waskoadv"],
+          "options": {
+            "jestConfig": "apps/waskoadv/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "waskoadv-e2e": {
+      "root": "apps/waskoadv-e2e",
+      "sourceRoot": "apps/waskoadv-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/waskoadv-e2e/cypress.json",
+            "tsConfig": "apps/waskoadv-e2e/tsconfig.e2e.json",
+            "devServerTarget": "waskoadv:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "waskoadv:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/waskoadv-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
+  },
+  "defaultProject": "waskoadv"
+}
