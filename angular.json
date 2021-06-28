@@ -21,7 +21,10 @@
               "apps/waskoadv/src/favicon.ico",
               "apps/waskoadv/src/assets"
             ],
-            "styles": ["apps/waskoadv/src/styles.scss"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "apps/waskoadv/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -91,6 +94,37 @@
             "jestConfig": "apps/waskoadv/jest.config.js",
             "passWithNoTests": true
           }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "apps/waskoadv/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/waskoadv",
+            "config": {
+              "configFolder": "apps/waskoadv/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
         }
       }
     },
@@ -122,6 +156,7 @@
     }
   },
   "cli": {
+    "analytics": false,
     "defaultCollection": "@nrwl/angular"
   },
   "schematics": {
