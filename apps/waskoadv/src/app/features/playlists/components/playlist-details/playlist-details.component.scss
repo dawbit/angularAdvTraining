@@ -1,0 +1,16 @@
+.playlist-details{
+    color:red;
+}
+
+.playlist-public{
+    color:red;
+}
+.playlist-private{
+    color:blue
+}
+
+
+.playlist-public,
+.playlist-private{
+    border-bottom: 1px solid currentColor;
+}

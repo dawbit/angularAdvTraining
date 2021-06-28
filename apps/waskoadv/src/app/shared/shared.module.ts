@@ -7,7 +7,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { PlaylistSharedModule } from '../features/playlists/shared/playlist-shared/playlist-shared.module';
 
 
 @NgModule({
@@ -19,8 +20,18 @@ import { MatListModule } from '@angular/material/list';
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    FlexLayoutModule,
+    PlaylistSharedModule
   ],
-  exports: [NavbarComponent]
+  exports: [
+    NavbarComponent,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatListModule,
+    FlexLayoutModule,
+    PlaylistSharedModule
+  ]
 })
 export class SharedModule { }

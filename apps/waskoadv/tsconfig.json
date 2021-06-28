@@ -20,7 +20,10 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "@core": ["src/app/core"]
+    }
   },
   "angularCompilerOptions": {
     "strictInjectionParameters": true,

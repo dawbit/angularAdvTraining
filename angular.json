@@ -156,7 +156,6 @@
     }
   },
   "cli": {
-    "analytics": false,
     "defaultCollection": "@nrwl/angular"
   },
   "schematics": {
@@ -183,6 +182,9 @@
       "unitTestRunner": "jest"
     },
     "@nrwl/angular:component": {
+      "style": "scss"
+    },
+    "@angular/angular:component": {
       "style": "scss"
     }
   },

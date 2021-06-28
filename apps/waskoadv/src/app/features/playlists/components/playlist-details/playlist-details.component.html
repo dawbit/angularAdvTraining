@@ -1,0 +1,43 @@
+<div
+  fxLayout="column"
+  fxLayoutAlign="start stretch"
+  fxLayoutGap="30px"
+  class="playlist-details"
+>
+  <mat-list>
+    <mat-list-item>
+      <span matLine>Name:</span>
+      <div fxFlex="1 1 60%">{{ playlist.name }}</div>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+
+    <mat-list-item>
+      <span matLine>Public:</span>
+      <div
+        fxFlex="1 1 60%"
+        [ngClass]="{
+         'playlist-public': playlist.public,
+         'playlist-private':!playlist.public
+        }"
+      >
+        {{ playlist.public ? 'Yes' : 'No' }}
+      </div>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+
+    <mat-list-item>
+      <span matLine>Description:</span>
+      <div fxFlex="1 1 60%">{{ playlist.description }}</div>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+  </mat-list>
+
+  <div
+    fxLayout="row"
+    fxLayoutAlign="start"
+    fxLayoutGap="20px"
+    style="padding: 0 16px"
+  >
+    <button fxFlexAlign="start" mat-raised-button color="primary" (click)="edit.emit(playlist.id)">Edit</button>
+  </div>
+</div>
