@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Playlist } from '../../../../core/model/Playlist';
 
 @Component({
   selector: 'wasko-playlist-details',
   templateUrl: './playlist-details.component.html',
-  styleUrls: ['./playlist-details.component.scss']
+  styleUrls: ['./playlist-details.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlaylistDetailsComponent implements OnInit {
 

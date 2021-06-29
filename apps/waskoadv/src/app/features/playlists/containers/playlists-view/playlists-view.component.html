@@ -4,15 +4,17 @@
 <!-- <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around" class="default-gap"> -->
   <!-- <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around" appLayoutGap> -->
 
-<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around" fxLayoutGap="20px">
+<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around" fxLayoutGap="20px" class="container">
 
   <div fxFlex="50%">
     <wasko-playlist-list></wasko-playlist-list>
+
+    <button mat-fab (click)="addPlaylist()"><mat-icon>add</mat-icon></button>
   </div>
 
   <div fxFlex="50%">
-    <wasko-playlist-details></wasko-playlist-details>
+    <wasko-playlist-details [playlist]="selectedPlaylist"></wasko-playlist-details>
 
-    <wasko-playlist-form></wasko-playlist-form>
+    <wasko-playlist-form [playlist]="selectedPlaylist"></wasko-playlist-form>
   </div>
 </div>

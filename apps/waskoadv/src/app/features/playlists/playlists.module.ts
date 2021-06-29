@@ -9,18 +9,16 @@ import { PlaylistDetailsComponent } from './components/playlist-details/playlist
 import { PlaylistFormComponent } from './components/playlist-form/playlist-form.component';
 import { SharedModule } from '../../shared/shared.module';
 
+
 const routes: Routes = [
   {
-    path: '',
-    component: PlaylistsComponent,
+    path: '', component: PlaylistsComponent,
     children: [
       {
-        path: '',
-        component: PlaylistsViewComponent,
-        pathMatch: 'prefix',
-      },
-    ],
-  },
+        path: '', component: PlaylistsViewComponent,
+      }
+    ]
+  }
 ];
 
 @NgModule({
@@ -30,9 +28,15 @@ const routes: Routes = [
     PlaylistListComponent,
     PlaylistListItemComponent,
     PlaylistDetailsComponent,
-    PlaylistFormComponent,
+    PlaylistFormComponent
   ],
-  imports: [CommonModule, SharedModule, RouterModule.forChild(routes)],
-  exports: [PlaylistsViewComponent],
+  imports: [
+    CommonModule,
+    SharedModule,
+    RouterModule.forChild(routes)
+  ],
+  exports: [
+    PlaylistsViewComponent,
+  ]
 })
-export class PlaylistsModule {}
+export class PlaylistsModule { }

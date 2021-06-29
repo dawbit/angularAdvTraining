@@ -7,12 +7,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PlaylistSharedModule } from '../features/playlists/shared/playlist-shared/playlist-shared.module';
+import { ClockComponent } from './containers/clock/clock.component';
 
 
 @NgModule({
-  declarations: [NavbarComponent],
+  declarations: [NavbarComponent, ClockComponent],
   imports: [
     CommonModule,
     LayoutModule,
@@ -22,6 +27,10 @@ import { PlaylistSharedModule } from '../features/playlists/shared/playlist-shar
     MatIconModule,
     MatListModule,
     FlexLayoutModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCheckboxModule,
+    FormsModule,
     PlaylistSharedModule
   ],
   exports: [
@@ -31,7 +40,12 @@ import { PlaylistSharedModule } from '../features/playlists/shared/playlist-shar
     MatIconModule,
     MatListModule,
     FlexLayoutModule,
-    PlaylistSharedModule
+    MatFormFieldModule,
+    MatInputModule,
+    MatCheckboxModule,
+    FormsModule,
+    PlaylistSharedModule,
+    ClockComponent
   ]
 })
 export class SharedModule { }
