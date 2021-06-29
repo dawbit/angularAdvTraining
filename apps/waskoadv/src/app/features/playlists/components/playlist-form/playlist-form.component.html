@@ -32,4 +32,28 @@
     <mat-hint align="end">0 / 150</mat-hint>
     <mat-error>Field is required</mat-error>
   </mat-form-field>
+
+  <div
+    fxLayout="row"
+    fxLayoutAlign="start"
+    fxLayoutGap="20px"
+    style="padding: 0 0px"
+  >
+    <button
+      fxFlexAlign="start"
+      mat-raised-button
+      color="warn"
+      (click)="cancel.emit(playlist.id)"
+    >
+      Cancel
+    </button>
+    <button
+      fxFlexAlign="start"
+      mat-raised-button
+      color="primary"
+      (click)="save.emit(playlist.id)"
+    >
+      Save
+    </button>
+  </div>
 </form>

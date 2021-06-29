@@ -22,10 +22,6 @@ export class PlaylistFormComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
-    //Add '${implements OnChanges}' to the class.
-
-    // changes['playlist'].currentValue === changes['playlist'].previousValue
   }
 
   @Output() cancel = new EventEmitter();

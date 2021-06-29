@@ -1,11 +1,10 @@
-<!-- <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="space-around" fxLayoutGap="20px"> -->
-  
-  <!-- <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around" [fxLayoutGap]="sizes.gap"> -->
-<!-- <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around" class="default-gap"> -->
-  <!-- <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around" appLayoutGap> -->
-
-<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around" fxLayoutGap="20px" class="container">
-
+<div
+  fxLayout="row"
+  fxLayout.xs="column"
+  fxLayoutAlign="space-around"
+  fxLayoutGap="20px"
+  class="container"
+>
   <div fxFlex="50%">
     <wasko-playlist-list></wasko-playlist-list>
 
@@ -13,8 +12,36 @@
   </div>
 
   <div fxFlex="50%">
-    <wasko-playlist-details [playlist]="selectedPlaylist"></wasko-playlist-details>
+    <!-- {{mode}} -->
 
-    <wasko-playlist-form [playlist]="selectedPlaylist"></wasko-playlist-form>
+    <!-- Error: NG0201: No provider for TemplateRef found. Find more at https://angular.io/errors/NG0201 -->
+    <!-- <div [ngIf]=" 'placki' ">Ala ma kota</div> -->
+
+    <!-- <ng-template > -->
+    <!-- <div *>
+        <wasko-playlist-details [playlist]="selectedPlaylist"
+        (edit)="editMode()"></wasko-playlist-details>
+      </div> -->
+    <!-- </ng-template> -->
+
+    <ng-template [ngIf]="mode === 'details'"
+                 [ngIfThen]="detailsRef" 
+                 [ngIfElse]="editRef"></ng-template>
+
+    <ng-template #detailsRef>
+      <wasko-playlist-details
+        [playlist]="selectedPlaylist"
+        (edit)="editMode()"
+      ></wasko-playlist-details>
+    </ng-template>
+
+    <ng-template #editRef>
+      <wasko-playlist-form
+        [playlist]="selectedPlaylist"
+        (cancel)="detailsMode()"
+      ></wasko-playlist-form>
+
+    </ng-template>
+    
   </div>
 </div>
