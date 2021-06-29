@@ -12,36 +12,18 @@
   </div>
 
   <div fxFlex="50%">
-    <!-- {{mode}} -->
-
-    <!-- Error: NG0201: No provider for TemplateRef found. Find more at https://angular.io/errors/NG0201 -->
-    <!-- <div [ngIf]=" 'placki' ">Ala ma kota</div> -->
-
-    <!-- <ng-template > -->
-    <!-- <div *>
-        <wasko-playlist-details [playlist]="selectedPlaylist"
-        (edit)="editMode()"></wasko-playlist-details>
-      </div> -->
-    <!-- </ng-template> -->
-
-    <ng-template [ngIf]="mode === 'details'"
-                 [ngIfThen]="detailsRef" 
-                 [ngIfElse]="editRef"></ng-template>
-
-    <ng-template #detailsRef>
+    <div [ngSwitch]="mode">
       <wasko-playlist-details
+        *ngSwitchDefault
         [playlist]="selectedPlaylist"
         (edit)="editMode()"
       ></wasko-playlist-details>
-    </ng-template>
-
-    <ng-template #editRef>
+      
       <wasko-playlist-form
+        *ngSwitchCase="'edit'"
         [playlist]="selectedPlaylist"
         (cancel)="detailsMode()"
       ></wasko-playlist-form>
-
-    </ng-template>
-    
+    </div>
   </div>
 </div>

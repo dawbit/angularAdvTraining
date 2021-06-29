@@ -7,6 +7,7 @@ import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 
 import { RouterModule, Routes } from '@angular/router';
+import { PlaylistsModule } from './features/playlists/playlists.module';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/playlists', pathMatch: 'full' },
