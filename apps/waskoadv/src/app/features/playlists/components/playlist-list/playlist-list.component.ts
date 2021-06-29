@@ -1,5 +1,5 @@
 import { NgForOf, NgForOfContext } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Playlist } from 'apps/waskoadv/src/app/core/model/Playlist';
 
 NgForOf
@@ -12,6 +12,14 @@ NgForOfContext
 export class PlaylistListComponent implements OnInit {
 
   @Input() playlists: Playlist[] = []
+
+  @Input() selected?: Playlist['id'];
+
+  @Output() selectedChange = new EventEmitter<Playlist['id']>();
+
+  select(playlist:Playlist){
+    this.selectedChange.emit(playlist.id)
+  }
 
   constructor() { }
 

@@ -30,12 +30,10 @@ export class PlaylistsViewComponent implements OnInit {
     description: 'Best playlist'
   }]
 
-  selectedPlaylist?: Playlist = {
-    id: '123',
-    name: 'Playlist 123',
-    public: false,
-    type: 'playlist',
-    description: 'Best playlist'
+  selectedPlaylist?: Playlist
+
+  selectPlaylist(playlist_id: Playlist['id']) {
+    this.selectedPlaylist = this.playlists.find(p => p.id === playlist_id)
   }
 
   editMode() { this.mode = 'edit' }

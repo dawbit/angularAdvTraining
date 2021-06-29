@@ -6,10 +6,18 @@
   class="container"
 >
   <div fxFlex="50%">
-    <wasko-playlist-list [playlists]="playlists">
+    <wasko-playlist-list
+      [playlists]="playlists"
+      [selected]="selectedPlaylist?.id"
+      (selectedChange)="selectPlaylist($event)"
+    >
     </wasko-playlist-list>
 
-    <button mat-fab (click)="addPlaylist()"><mat-icon>add</mat-icon></button>
+    <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="20px" style="position: absolute;
+    right: 40px;
+    bottom: 40px;">
+      <button mat-fab (click)="addPlaylist()"><mat-icon>add</mat-icon></button>
+    </div>
   </div>
 
   <div fxFlex="50%">

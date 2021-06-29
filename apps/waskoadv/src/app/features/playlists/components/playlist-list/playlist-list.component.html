@@ -1,5 +1,10 @@
 <mat-action-list>
-  <a mat-list-item *ngFor="let playlist of playlists; index as i">
+  <a
+    mat-list-item
+    *ngFor="let playlist of playlists; index as i"
+    [class.mat-list-option-active]="playlist.id == selected"
+    (click)="select(playlist)"
+  >
     <span matLine>{{ i + 1 }}. {{ playlist.name }}</span>
 
     <mat-divider></mat-divider>
