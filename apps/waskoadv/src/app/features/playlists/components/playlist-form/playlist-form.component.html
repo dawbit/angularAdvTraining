@@ -1,30 +1,17 @@
-<form fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="20px">
+
+
+
+<form [ngFormOptions]="{}"
+
+fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="20px">
   <pre>{{ playlist | json }}</pre>
 
-  <!-- [value]="playlist.name"
-  (input)="playlist.name = $any($event.currentTarget).value" -->
-
-  <!-- [ngModel]="playlist.name"
-  (ngModelChange)="playlist.name = validate($event)" -->
-
-  <!-- [ngPlacki]="playlist.name"
-    [ngModel]="playlist.name"
-    (ngModelChange)="playlist.name = $event.replace('*','')"
-    
-  (ngPlackiChange)="playlist.name = $event"
-  
-  [(ngPlacki)]="playlist.name" -->
-
-  <!-- [(ngModel)]="playlist.name" -->
+  <!-- No value accessor for form control with name: 'test' -->
+  <!-- <div ngModel name="test"></div> -->
 
   <mat-form-field>
     <mat-label>Name:</mat-label>
-    <input
-      [ngModel]="playlist.name"
-      type="text"
-      name="name"
-      matInput
-    />
+    <input [ngModel]="playlist.name" type="text" name="name" matInput />
     <mat-hint align="end">0 / 150</mat-hint>
     <mat-error>Field is required</mat-error>
   </mat-form-field>
@@ -39,7 +26,6 @@
       name="description"
       matInput
     ></textarea>
-    <mat-hint align="end">0 / 150</mat-hint>
     <mat-error>Field is required</mat-error>
   </mat-form-field>
 
@@ -57,6 +43,7 @@
     >
       Cancel
     </button>
+
     <button
       fxFlexAlign="start"
       mat-raised-button

@@ -13,13 +13,7 @@ import { Playlist } from 'apps/waskoadv/src/app/core/model/Playlist';
 })
 export class PlaylistFormComponent implements OnInit {
 
-  @Input() playlist: Playlist = {
-    id: '123',
-    name: 'Playlist 123',
-    public: false,
-    type: 'playlist',
-    description: 'Best playlist'
-  }
+  @Input() playlist!: Playlist
 
   ngOnChanges(changes: SimpleChanges): void {
   }
@@ -32,6 +26,10 @@ export class PlaylistFormComponent implements OnInit {
   }
 
   constructor(private cdr: ChangeDetectorRef) {
+  }
+  
+  ngAfterViewInit(){
+
   }
 
 

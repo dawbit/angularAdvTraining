@@ -18,6 +18,7 @@ export class PlaylistListComponent implements OnInit {
   @Output() selectedChange = new EventEmitter<Playlist['id']>();
 
   select(playlist:Playlist){
+    // this.selected = playlist.id
     this.selectedChange.emit(playlist.id)
   }
 
