@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Playlist } from 'apps/waskoadv/src/app/core/model/Playlist';
 
 @Component({
   selector: 'wasko-playlist-list-item',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./playlist-list-item.component.scss']
 })
 export class PlaylistListItemComponent implements OnInit {
+
 
   constructor() { }
 

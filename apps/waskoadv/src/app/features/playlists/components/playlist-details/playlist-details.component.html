@@ -16,11 +16,11 @@
       <div
         fxFlex="1 1 60%"
         [ngClass]="{
-         'playlist-public': playlist.public,
-         'playlist-private':!playlist.public
+          'playlist-public': playlist.public,
+          'playlist-private': !playlist.public
         }"
       >
-        {{ playlist.public ? 'Yes' : 'No' }}
+        {{ playlist.public | yesno }}
       </div>
       <mat-divider></mat-divider>
     </mat-list-item>
@@ -38,6 +38,13 @@
     fxLayoutGap="20px"
     style="padding: 0 16px"
   >
-    <button fxFlexAlign="start" mat-raised-button color="primary" (click)="edit.emit(playlist.id)">Edit</button>
+    <button
+      fxFlexAlign="start"
+      mat-raised-button
+      color="primary"
+      (click)="edit.emit(playlist.id)"
+    >
+      Edit
+    </button>
   </div>
 </div>

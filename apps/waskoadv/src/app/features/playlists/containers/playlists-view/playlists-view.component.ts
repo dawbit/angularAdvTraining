@@ -10,7 +10,27 @@ export class PlaylistsViewComponent implements OnInit {
 
   mode: 'details' | 'edit' = 'details'
 
-  selectedPlaylist: Playlist = {
+  playlists: Playlist[] = [{
+    id: '123',
+    name: 'Playlist 123',
+    public: false,
+    type: 'playlist',
+    description: 'Best playlist'
+  }, {
+    id: '234',
+    name: 'Playlist 234',
+    public: true,
+    type: 'playlist',
+    description: 'Best playlist'
+  }, {
+    id: '345',
+    name: 'Playlist 345',
+    public: false,
+    type: 'playlist',
+    description: 'Best playlist'
+  }]
+
+  selectedPlaylist?: Playlist = {
     id: '123',
     name: 'Playlist 123',
     public: false,
@@ -18,15 +38,26 @@ export class PlaylistsViewComponent implements OnInit {
     description: 'Best playlist'
   }
 
-  editMode(){ this.mode = 'edit'}
-  detailsMode(){ this.mode = 'details'}
+  editMode() { this.mode = 'edit' }
+  detailsMode() { this.mode = 'details' }
+
+  savePlaylist(draft: Playlist) {
+    console.log(draft);
+
+  }
 
   constructor() { }
 
   addPlaylist() {
+    // this.selectedPlaylist.name // Object is possibly 'undefined'
+
+    // Function Guard
+    if (!this.selectedPlaylist) { return }
+
     this.selectedPlaylist = {
-      ...this.selectedPlaylist, // reuse reference
-      name: 'changed' // copy on change
+      ...this.selectedPlaylist,
+      name: Date.now().toString()
+      // public: !this.selectedPlaylist.public
     }
   }
 

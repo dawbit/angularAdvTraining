@@ -1,1 +1,7 @@
-<p>playlist-list works!</p>
+<mat-action-list>
+  <a mat-list-item *ngFor="let playlist of playlists; index as i">
+    <span matLine>{{ i + 1 }}. {{ playlist.name }}</span>
+
+    <mat-divider></mat-divider>
+  </a>
+</mat-action-list>

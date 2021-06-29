@@ -9,3 +9,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     margin: 0 auto;
     max-width: 1024px;
 }
+// mat-list-option-active
+.mat-list-option.mat-list-option-active{
+    background-color: #3f51b5;
+    color:#fff;
+}

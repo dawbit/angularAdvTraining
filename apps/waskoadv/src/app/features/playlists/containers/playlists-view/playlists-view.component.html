@@ -6,23 +6,25 @@
   class="container"
 >
   <div fxFlex="50%">
-    <wasko-playlist-list></wasko-playlist-list>
+    <wasko-playlist-list [playlists]="playlists">
+    </wasko-playlist-list>
 
     <button mat-fab (click)="addPlaylist()"><mat-icon>add</mat-icon></button>
   </div>
 
   <div fxFlex="50%">
-    <div [ngSwitch]="mode">
+    <div [ngSwitch]="mode" *ngIf="selectedPlaylist as playlist">
       <wasko-playlist-details
         *ngSwitchDefault
-        [playlist]="selectedPlaylist"
+        [playlist]="playlist"
         (edit)="editMode()"
       ></wasko-playlist-details>
-      
+
       <wasko-playlist-form
         *ngSwitchCase="'edit'"
-        [playlist]="selectedPlaylist"
+        [playlist]="playlist"
         (cancel)="detailsMode()"
+        (save)="savePlaylist($event)"
       ></wasko-playlist-form>
     </div>
   </div>

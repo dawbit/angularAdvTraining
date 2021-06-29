@@ -25,25 +25,17 @@ export class PlaylistFormComponent implements OnInit {
   }
 
   @Output() cancel = new EventEmitter();
-  @Output() save = new EventEmitter();
+  @Output() save = new EventEmitter<Playlist>();
 
-  constructor(private cdr: ChangeDetectorRef) {
-    // cdr.detach()
+  submit() {
+    this.save.emit(this.playlist)
   }
 
-  alert() {
-    // NG0100: ExpressionChangedAfterItHasBeenCheckedError: 
-    // Expression has changed after it was checked.
-    // Previous value: 'Playlist 123'. 
-    // Current value: 'changed while rendering!'.. 
-    // Find more at https://angular.io/errors/NG0100
-    // this.playlist.name = 'changed while rendering!'
-    console.log('Check - detect changes');
+  constructor(private cdr: ChangeDetectorRef) {
   }
 
 
   ngOnInit(): void {
-    // this.cdr.detectChanges()
   }
 
 }

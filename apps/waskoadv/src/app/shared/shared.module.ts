@@ -14,10 +14,11 @@ import { FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PlaylistSharedModule } from '../features/playlists/shared/playlist-shared/playlist-shared.module';
 import { ClockComponent } from './containers/clock/clock.component';
+import { YesnoPipe } from './pipes/yesno.pipe';
 
 
 @NgModule({
-  declarations: [NavbarComponent, ClockComponent],
+  declarations: [NavbarComponent, ClockComponent, YesnoPipe],
   imports: [
     CommonModule,
     LayoutModule,
@@ -45,7 +46,8 @@ import { ClockComponent } from './containers/clock/clock.component';
     MatCheckboxModule,
     FormsModule,
     PlaylistSharedModule,
-    ClockComponent
+    ClockComponent,
+    YesnoPipe
   ]
 })
 export class SharedModule { }

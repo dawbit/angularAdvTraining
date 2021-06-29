@@ -1,23 +1,33 @@
 <form fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="20px">
-  <!-- <mat-form-field appearance="standard"> -->
-  <!-- MatFormFieldControl -->
+  <pre>{{ playlist | json }}</pre>
 
-  {{ playlist.name }}
+  <!-- [value]="playlist.name"
+  (input)="playlist.name = $any($event.currentTarget).value" -->
+
+  <!-- [ngModel]="playlist.name"
+  (ngModelChange)="playlist.name = validate($event)" -->
+
+  <!-- [ngPlacki]="playlist.name"
+    [ngModel]="playlist.name"
+    (ngModelChange)="playlist.name = $event.replace('*','')"
+    
+  (ngPlackiChange)="playlist.name = $event"
+  
+  [(ngPlacki)]="playlist.name" -->
+
+  <!-- [(ngModel)]="playlist.name" -->
 
   <mat-form-field>
     <mat-label>Name:</mat-label>
-    <input type="text" [ngModel]="playlist.name" name="name" matInput />
+    <input
+      [ngModel]="playlist.name"
+      type="text"
+      name="name"
+      matInput
+    />
     <mat-hint align="end">0 / 150</mat-hint>
     <mat-error>Field is required</mat-error>
   </mat-form-field>
-
-  <!--  -->
-  <input type="text" value="ala ma kota" #inputRef (keyup)="({})" />
-  <mat-hint>{{ inputRef.value.length }} / 150</mat-hint>
-
-  {{ alert() }}
-
-  <!--  -->
 
   <mat-checkbox [ngModel]="playlist.public" name="public">Public</mat-checkbox>
 
@@ -51,7 +61,7 @@
       fxFlexAlign="start"
       mat-raised-button
       color="primary"
-      (click)="save.emit(playlist.id)"
+      (click)="submit()"
     >
       Save
     </button>
