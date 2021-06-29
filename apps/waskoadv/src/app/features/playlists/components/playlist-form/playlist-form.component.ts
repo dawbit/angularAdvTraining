@@ -16,7 +16,7 @@ export class PlaylistFormComponent implements OnInit {
 
   @Input() playlist!: Playlist
   @Output() cancel = new EventEmitter();
-  @Output() save = new EventEmitter<Playlist>();
+  @Output() save = new EventEmitter<Playlist>( true /* isAsync - wait for next render */); 
 
   @ViewChild('nameInputRef', {
     read: NgModel,
@@ -58,14 +58,17 @@ export class PlaylistFormComponent implements OnInit {
     //   console.log(val['name']);
     // })
 
-    setTimeout(() => {
+    // setTimeout(()=>{})
+
+    Promise.resolve().then(() => {
       // this.playlist.name = 'cahnged'
-      this.formRef?.form.get('name')?.valueChanges.subscribe(val => {
-        console.log(val);
-      })
-      // debugger
+      // this.formRef?.form.get('name')?.valueChanges.subscribe(val => {
+      //   console.log(val);
+      // })
+      this.formRef
+      debugger
     })
-    
+
   }
 
 
