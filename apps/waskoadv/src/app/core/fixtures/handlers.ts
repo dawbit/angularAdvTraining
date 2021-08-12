@@ -12,7 +12,7 @@ export const handlers = [
     //     );
     // }),
     rest.get('/albums', (req, res, ctx) => {
-        debugger
+        const query = new URLSearchParams(req.url.search).get('query') || ''
         // Check if the user is authenticated in this session
         // const isAuthenticated = sessionStorage.getItem('is-authenticated');
         // if (!isAuthenticated) {
@@ -27,7 +27,7 @@ export const handlers = [
         // If authenticated, return a mocked user details
         return res(
             ctx.status(200),
-            ctx.json(mockAlbums)
+            ctx.json(mockAlbums.filter(a => a.name.includes(query)))
         );
     }),
 ];

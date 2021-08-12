@@ -3,6 +3,7 @@ import { MusicSearchService } from 'apps/waskoadv/src/app/core/api/music-search.
 import { Album, AlbumView } from 'apps/waskoadv/src/app/core/model/Search';
 import { API_URL_TOKEN, INITIAL_RESULTS_TOKEN } from 'apps/waskoadv/src/app/core/tokens';
 import { environment } from 'apps/waskoadv/src/environments/environment';
+import { Subscription } from 'rxjs';
 import { SearchFormEvent } from '../../components/search-form/search-form.component';
 
 
@@ -19,15 +20,33 @@ export class MusicSearchViewComponent implements OnInit {
   constructor(
     private service: MusicSearchService
   ) {
-    
-    this.results = this.service.getResults()
+
   }
 
 
   ngOnInit(): void { }
 
   searchAlbums(event: SearchFormEvent) {
-    console.log(event);
+    
+    const obs = this.service.getResults(event.query)
+
+    const sub: Subscription  = obs.subscribe({
+      // next: results => this.results = results,
+      next: console.log,
+      error: console.error,
+      complete: () => console.log('complete'),
+    })
+
+    sub.unsubscribe()
+
+    obs.subscribe({
+      // next: results => this.results = results,
+      next: console.log,
+      error: console.error,
+      complete: () => console.log('complete'),
+    })
+
+    console.log(event.query);
   }
 
 }
