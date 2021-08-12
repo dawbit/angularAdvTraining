@@ -11,24 +11,29 @@
   <!-- No value accessor for form control with name: 'test' -->
   <!-- <div ngModel name="test"></div> -->
 
-  <mat-form-field>
-    <mat-label>Name:</mat-label>
-    <input
-      [ngModel]="playlist.name"
-      type="text"
-      name="name"
-      matInput
-      required
-      waskoCensor
-      #nameRef="ngModel"
-    />
-    <mat-hint align="end">{{ nameRef.value?.length }} / 150</mat-hint>
-    <mat-error *ngIf="nameRef.getError('required')">Field is required</mat-error>
-    <mat-error *ngIf="nameRef.getError('censor') as error">
-      <!-- "{{nameRef.getError('censor').badword}}" is forbidden -->
-      "{{error.badword}}" is forbidden
-    </mat-error>
-  </mat-form-field>
+  <div class="special_input">
+    <mat-form-field>
+      <mat-label>Name:</mat-label>
+      <input
+        class="big-input"
+        [ngModel]="playlist.name"
+        type="text"
+        name="name"
+        matInput
+        required
+        waskoCensor
+        #nameRef="ngModel"
+      />
+      <mat-hint align="end">{{ nameRef.value?.length }} / 150</mat-hint>
+      <mat-error *ngIf="nameRef.getError('required')"
+        >Field is required</mat-error
+      >
+      <mat-error *ngIf="nameRef.getError('censor') as error">
+        <!-- "{{nameRef.getError('censor').badword}}" is forbidden -->
+        "{{ error.badword }}" is forbidden
+      </mat-error>
+    </mat-form-field>
+  </div>
 
   <mat-checkbox [ngModel]="playlist.public" name="public">Public</mat-checkbox>
 

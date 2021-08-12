@@ -1,0 +1,9 @@
+// :host(.mat-list-option-active){
+//     display: block;
+//     border:1px solid black;
+// }
+
+:host-context(.mat-list-option-active){
+    display: block;
+    border:1px solid black;
+}

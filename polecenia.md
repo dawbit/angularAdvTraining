@@ -226,3 +226,12 @@ ng g c shared/modules/tabs/components/tabs-group  --export
 ng g c shared/modules/tabs/components/tab  --export
 
 
+## Music search 
+
+ng g m features/music-search --module=app --route=music-search
+
+ng g c features/music-search/containers/music-search-view
+ng g c features/music-search/components/search-form
+ng g c features/music-search/components/search-results
+ng g c features/music-search/components/album-card
+

@@ -5,7 +5,13 @@
     [class.mat-list-option-active]="playlist.id == selected"
     (click)="select(playlist)"
   >
-    <span matLine>{{ i + 1 }}. {{ playlist.name }}</span>
+    <wasko-playlist-list-item matLine >
+      {{ i + 1 }}. {{ playlist.name }}
+    </wasko-playlist-list-item>
+    
+    <p>test</p>
+
+    <button mat-button (click)="removeItem(playlist.id)">&times;</button>
 
     <mat-divider></mat-divider>
   </a>

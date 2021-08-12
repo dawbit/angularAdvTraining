@@ -1,5 +1,5 @@
 import { NgForOf, NgForOfContext } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { Playlist } from 'apps/waskoadv/src/app/core/model/Playlist';
 
 NgForOf
@@ -8,7 +8,9 @@ NgForOfContext
   selector: 'wasko-playlist-list',
   templateUrl: './playlist-list.component.html',
   styleUrls: ['./playlist-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  // encapsulation: ViewEncapsulation.None
+  // encapsulation: ViewEncapsulation.ShadowDom
 })
 export class PlaylistListComponent implements OnInit {
 
@@ -18,10 +20,15 @@ export class PlaylistListComponent implements OnInit {
   @Input() selected?: Playlist['id'];
 
   @Output() selectedChange = new EventEmitter<Playlist['id']>();
+  @Output() remove = new EventEmitter<Playlist['id']>();
 
-  select(playlist:Playlist){
+  select(playlist: Playlist) {
     // this.selected = playlist.id
     this.selectedChange.emit(playlist.id)
+  }
+
+  removeItem(id: Playlist['id']) {
+    this.remove.emit(id)
   }
 
   constructor() { }

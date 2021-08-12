@@ -42,6 +42,7 @@ export class PlaylistsViewComponent implements OnInit {
 
   selectedPlaylist?: Playlist
 
+  // selectPlaylist(playlist_id: string) {
   selectPlaylist(playlist_id: Playlist['id']) {
     this.selectedPlaylist = this.playlists.find(p => p.id === playlist_id)
   }
@@ -56,9 +57,21 @@ export class PlaylistsViewComponent implements OnInit {
     // const index = this.playlists.findIndex(p => p.id === draft.id)
     // if(index !== -1)
     // this.playlists.splice(index, 1, draft)
-    
+
     // Immutable - OnPush will detect change
     this.playlists = this.playlists.map(p => p.id === draft.id ? draft : p)
+  }
+
+  removePlaylist(id: Playlist['id']) {
+    // const index = this.playlists.findIndex(p => p.id === id)
+    // if(index !== -1)
+    // this.playlists.splice(index, 1)
+    // this.playlists = [...this.playlists]
+
+    // const index = this.playlists.findIndex(p => p.id === id)
+    // this.playlists = [...this.playlists.slice(0, index - 1), ...this.playlists.slice(index)]
+
+    this.playlists = this.playlists.filter(p => p.id !== id)
   }
 
   constructor() { }

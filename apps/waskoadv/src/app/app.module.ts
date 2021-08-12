@@ -11,13 +11,9 @@ import { PlaylistsModule } from './features/playlists/playlists.module';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/playlists', pathMatch: 'full' },
-  {
-    path: 'playlists',
-    loadChildren: () =>
-      import('./features/playlists/playlists.module')
-        .then(m => m.PlaylistsModule)
-  },
+  { path: 'playlists', loadChildren: () => import('./features/playlists/playlists.module').then(m => m.PlaylistsModule) },
   { path: 'experiments', loadChildren: () => import('./features/experiments/experiments.module').then(m => m.ExperimentsModule) },
+  { path: 'music-search', loadChildren: () => import('./features/music-search/music-search.module').then(m => m.MusicSearchModule) },
   { path: '**', redirectTo: '/playlists', pathMatch: 'full' },
 
   // { path: '', component: HomeComponent },

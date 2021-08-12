@@ -10,6 +10,7 @@
       [playlists]="playlists"
       [selected]="selectedPlaylist?.id"
       (selectedChange)="selectPlaylist($event)"
+      (remove)="removePlaylist($event)"
     >
     </wasko-playlist-list>
 

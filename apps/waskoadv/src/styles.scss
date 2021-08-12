@@ -1,4 +1,10 @@
 @use '~@angular/material' as mat;
+@use '@angular/material/core/style/form-common';
+
+
+// override mixin
+@mixin standard-theme($theme-or-color-config) {}
+
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
@@ -23,6 +29,8 @@ $my-theme: mat.define-light-theme((
         warn: $my-warn,
     )
 ));
+
+
 
 @include mat.core();
 @include mat.core-theme($my-theme);
@@ -67,3 +75,20 @@ $my-theme: mat.define-light-theme((
     background-color: #3f51b5;
     color:#ccc;
 } */
+
+input.big-input{
+    font-size: 2em;
+    padding: 0.3em;
+    color: rebeccapurple;
+}
+
+
+.special_input .mat-form-field-appearance-standard {
+    .mat-form-field-underline {
+      background-color: rebeccapurple;
+    }
+
+    &.mat-form-field-disabled .mat-form-field-underline {
+      @include form-common.private-control-disabled-underline(rebeccapurple);
+    }
+  }

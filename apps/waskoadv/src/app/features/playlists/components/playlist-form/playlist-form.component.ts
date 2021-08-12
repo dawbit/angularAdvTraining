@@ -8,15 +8,15 @@ import { Playlist } from 'apps/waskoadv/src/app/core/model/Playlist';
   templateUrl: './playlist-form.component.html',
   styleUrls: ['./playlist-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  // providers: [
-  //   {
-  //     provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
-  //     useValue: {
-  //       appearance: 'standard', 
-  //       hideRequiredMarker: false
-  //     }
-  //   }
-  // ]
+  providers: [
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: {
+        appearance: 'standard', 
+        hideRequiredMarker: false
+      }
+    }
+  ]
 })
 export class PlaylistFormComponent implements OnInit {
 
