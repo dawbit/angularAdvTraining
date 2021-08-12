@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit, Optional } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MusicSearchService } from 'apps/waskoadv/src/app/core/api/music-search.service';
 import { Album, AlbumView } from 'apps/waskoadv/src/app/core/model/Search';
 import { API_URL_TOKEN, INITIAL_RESULTS_TOKEN } from 'apps/waskoadv/src/app/core/tokens';
@@ -16,11 +17,19 @@ import { SearchFormEvent } from '../../components/search-form/search-form.compon
 export class MusicSearchViewComponent implements OnInit {
 
   results: AlbumView[] = []
+  message = ''
 
   constructor(
+    private _snackBar: MatSnackBar,
     private service: MusicSearchService
   ) {
 
+  }
+
+  showMessage(message: string, action: string = '') {
+    this._snackBar.open(message, action, {
+      duration: 2000
+    });
   }
 
 
@@ -28,25 +37,18 @@ export class MusicSearchViewComponent implements OnInit {
 
   searchAlbums(event: SearchFormEvent) {
 
-    const obs = this.service.getResults(event.query)
+    this.service.getResults(event.query).subscribe({
+      next: results => {
+        this.results = results.albums.items
+      },
+      // next: console.log,
+      error: error => {
 
-    const sub: Subscription  = obs.subscribe({
-      // next: results => this.results = results,
-      next: console.log,
-      error: console.error,
+        // this.message = error.message
+        this.showMessage(error.error.error.message, 'Dismiss')
+      },
       complete: () => console.log('complete'),
     })
-
-    sub.unsubscribe()
-
-    obs.subscribe({
-      // next: results => this.results = results,
-      next: console.log,
-      error: console.error,
-      complete: () => console.log('complete'),
-    })
-
-    console.log(event.query);
   }
 
 }

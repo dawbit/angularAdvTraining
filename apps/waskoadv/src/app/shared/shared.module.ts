@@ -22,6 +22,7 @@ import { CensorDirective } from './directives/censor.directive';
 import { TabsModule } from './modules/tabs/tabs.module';
 import { SelectableListOptionComponent } from './components/selectable-list-option/selectable-list-option.component';
 import { MatSelectModule } from '@angular/material/select'
+import { MatSnackBarModule } from '@angular/material/snack-bar'
 
 @NgModule({
   declarations: [NavbarComponent, ClockComponent, YesnoPipe, CensorDirective, SelectableListOptionComponent],
@@ -41,7 +42,7 @@ import { MatSelectModule } from '@angular/material/select'
     ReactiveFormsModule,
     PlaylistSharedModule,
     TabsModule,
-    MatCardModule, MatSelectModule
+    MatCardModule, MatSelectModule, MatSnackBarModule
   ],
   exports: [
     NavbarComponent,
@@ -61,7 +62,7 @@ import { MatSelectModule } from '@angular/material/select'
     CensorDirective,
     TabsModule,
     MatCardModule,
-    SelectableListOptionComponent, MatSelectModule
+    SelectableListOptionComponent, MatSelectModule, MatSnackBarModule
   ]
 })
 export class SharedModule { }

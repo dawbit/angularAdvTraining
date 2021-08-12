@@ -32,7 +32,7 @@ export const routes: Routes = [
     RouterModule.forRoot(routes),
     SharedModule,
     // Treeshakeable
-    environment.production ? [] : [FixturesModule]
+    // environment.production ? [] : [FixturesModule]
   ],
   providers: [
     // {

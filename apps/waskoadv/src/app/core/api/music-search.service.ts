@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
-import { Album, AlbumView } from '../model/Search';
+import { Album, AlbumsSearchResponse, AlbumView } from '../model/Search';
+import { AuthService } from '../services/auth.service';
 import { API_URL_TOKEN, INITIAL_RESULTS_TOKEN } from '../tokens';
 // import { MusicSearchModule } from '../../features/music-search/music-search.module';
 
@@ -16,6 +17,7 @@ export class MusicSearchService {
 
   constructor(
     private http: HttpClient,
+    private auth: AuthService,
     @Inject(API_URL_TOKEN) private api_url: string,
     @Optional() @Inject(INITIAL_RESULTS_TOKEN) initial: AlbumView[] | null
   ) {
@@ -24,13 +26,16 @@ export class MusicSearchService {
 
   getResults(query: string) {
 
-    const obs = this.http.get<Album[]>(`${this.api_url}/albums`, {
+    return this.http.get<AlbumsSearchResponse>(`${this.api_url}/search`, {
+      headers: {
+        Authorization: `Bearer ${this.auth.getToken()}`
+      },
       params: {
-        query: query
-      }
+        query: query,
+        type: 'album'
+      },
     })
 
-    return obs
 
 
   }

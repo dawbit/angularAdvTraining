@@ -4,12 +4,16 @@ import { AlbumView } from './model/Search';
 import { API_URL_TOKEN, INITIAL_RESULTS_TOKEN } from './tokens';
 import { MusicSearchService } from './api/music-search.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { environment } from '../../environments/environment';
+import { OAuthModule } from 'angular-oauth2-oidc';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    OAuthModule.forRoot()
   ],
   providers: [
     // {
@@ -23,7 +27,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     // },
     {
       provide: API_URL_TOKEN,
-      useValue: 'https://api.spotify.com/v1/'
+      useValue: environment.api_url
     },
     // {
     //   provide: MusicSearchService,
@@ -57,7 +61,13 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     // MusicSearchService
   ]
 })
-export class CoreModule { }
+export class CoreModule {
+
+  constructor(private auth: AuthService) {
+    auth.init()
+
+  }
+}
 
 // MusicProiver => SpotifyProiver
 // PaymentProiver => CrediCardProvider
