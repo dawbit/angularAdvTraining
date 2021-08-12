@@ -1,0 +1,11 @@
+<mat-card>
+  <mat-card-header (click)="toggle()">
+    <mat-card-title>{{ label }}</mat-card-title>
+    <div style="flex: 100%"></div>
+    <mat-icon>expand_more</mat-icon>
+  </mat-card-header>
+
+  <mat-card-content *ngIf="open" #ref>
+      <ng-content ></ng-content>
+  </mat-card-content>
+</mat-card>

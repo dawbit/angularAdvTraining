@@ -1,9 +1,56 @@
+@use '~@angular/material' as mat;
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+// @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+
+// $my-palette: mat.$indigo-palette;
+// https://material.angular.io/guide/theming#create-your-own-palette
+
+$my-primary: mat.define-palette(mat.$indigo-palette, 500);
+$my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The "warn" palette is optional and defaults to red if not specified.
+$my-warn: mat.define-palette(mat.$red-palette);
+
+$my-theme: mat.define-light-theme((
+    color: (
+        primary: $my-primary,
+        accent: $my-accent,
+        warn: $my-warn,
+    )
+));
+
+@include mat.core();
+@include mat.core-theme($my-theme);
+// @include mat.button-theme($my-theme);
+
+@include mat.all-component-themes($my-theme);
+
+/* 
+.my-light-theme {
+    @include mat.core-color($light-theme);
+    @include mat.button-color($light-theme);
+}
+*/
+
+
+.mat-list-item.mat-list-option-active{
+    background-color: mat.get-color-from-palette($my-primary, 500);
+    color: mat.get-color-from-palette($my-primary, '500-contrast');
+}
+.mat-list-item.mat-list-option-active:hover{
+    background-color: mat.get-color-from-palette($my-primary, 400);
+    color: mat.get-color-from-palette($my-primary, '400-contrast');
+}
+
+
+
+/* ========== */
+        
 .container{
     width:90%;
     margin: 0 auto;
@@ -11,7 +58,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 // mat-list-option-active
-
+/* 
 .mat-list-item.mat-list-option-active{
     background-color: #3f51b5;
     color:#fff;
@@ -19,4 +66,4 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-list-item.mat-list-option-active:hover{
     background-color: #3f51b5;
     color:#ccc;
-}
+} */

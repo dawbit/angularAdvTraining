@@ -1,0 +1,25 @@
+<p>experiments works!</p>
+
+<!-- No provider for TabsGroupComponent! -->
+<!-- <wasko-tab label="First"> Content 1 </wasko-tab> -->
+
+<input type="number" min="0" max="2" [(ngModel)]="whichOpen" />
+
+<wasko-tabs-group [(open)]="whichOpen" #tabsRef>
+  <wasko-tab label="First"> Content 1 </wasko-tab>
+  <wasko-tab label="Second"> Content 2 </wasko-tab>
+  <wasko-tab label="Third">
+    <div>Content 3</div>
+  </wasko-tab>
+</wasko-tabs-group>
+
+{{ tabsRef.open }}
+
+<input type="number" min="0" max="2" [(ngModel)]="whichOpen2" />
+<wasko-tabs-group [(open)]="whichOpen2">
+  <wasko-tab label="First"> Content 1 </wasko-tab>
+  <wasko-tab label="Second"> Content 2 </wasko-tab>
+  <wasko-tab label="Third">
+    <div>Content 3</div>
+  </wasko-tab>
+</wasko-tabs-group>

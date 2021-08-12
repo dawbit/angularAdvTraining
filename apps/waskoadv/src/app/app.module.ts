@@ -17,6 +17,7 @@ export const routes: Routes = [
       import('./features/playlists/playlists.module')
         .then(m => m.PlaylistsModule)
   },
+  { path: 'experiments', loadChildren: () => import('./features/experiments/experiments.module').then(m => m.ExperimentsModule) },
   { path: '**', redirectTo: '/playlists', pathMatch: 'full' },
 
   // { path: '', component: HomeComponent },

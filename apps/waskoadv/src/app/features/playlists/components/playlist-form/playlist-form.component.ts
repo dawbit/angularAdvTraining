@@ -8,30 +8,28 @@ import { Playlist } from 'apps/waskoadv/src/app/core/model/Playlist';
   templateUrl: './playlist-form.component.html',
   styleUrls: ['./playlist-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'standard' } }
-  ]
+  // providers: [
+  //   {
+  //     provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+  //     useValue: {
+  //       appearance: 'standard', 
+  //       hideRequiredMarker: false
+  //     }
+  //   }
+  // ]
 })
 export class PlaylistFormComponent implements OnInit {
 
   @Input() playlist!: Playlist
   @Output() cancel = new EventEmitter();
-  @Output() save = new EventEmitter<Playlist>( true /* isAsync - wait for next render */); 
+  @Output() save = new EventEmitter<Playlist>();
 
-  @ViewChild('nameInputRef', {
-    read: NgModel,
-    static: false /* <- Is inside template */
-  })
-  nameInputRef?: NgModel
-
-  @ViewChildren(NgModel) fields = new QueryList<NgModel>()
-
-  // @ViewChild('formRef', { read: NgForm })
   @ViewChild(NgForm)
   formRef?: NgForm
 
 
   ngOnChanges(changes: SimpleChanges): void {
+    
   }
 
 
@@ -46,34 +44,20 @@ export class PlaylistFormComponent implements OnInit {
   constructor(private cdr: ChangeDetectorRef) {
   }
 
-  // ngAfterContentChecked(): void {  }
 
   ngDoCheck(): void {
-    console.log('Check'); // Works even with onPush
   }
 
   ngAfterViewInit() {
-    // this.formRef // too soon = no form fields!
-    // this.formRef?.form.valueChanges.subscribe(val => {
-    //   console.log(val['name']);
-    // })
-
-    // setTimeout(()=>{})
-
-    Promise.resolve().then(() => {
-      // this.playlist.name = 'cahnged'
-      // this.formRef?.form.get('name')?.valueChanges.subscribe(val => {
-      //   console.log(val);
-      // })
+    setTimeout(() => {
       this.formRef
-      debugger
+      // debugger
     })
 
   }
 
 
   ngOnInit(): void {
-    // this.formRef // too soon = undefined
   }
 
 }

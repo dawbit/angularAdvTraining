@@ -18,10 +18,16 @@
       type="text"
       name="name"
       matInput
+      required
+      waskoCensor
       #nameRef="ngModel"
     />
     <mat-hint align="end">{{ nameRef.value?.length }} / 150</mat-hint>
-    <mat-error>Field is required</mat-error>
+    <mat-error *ngIf="nameRef.getError('required')">Field is required</mat-error>
+    <mat-error *ngIf="nameRef.getError('censor') as error">
+      <!-- "{{nameRef.getError('censor').badword}}" is forbidden -->
+      "{{error.badword}}" is forbidden
+    </mat-error>
   </mat-form-field>
 
   <mat-checkbox [ngModel]="playlist.public" name="public">Public</mat-checkbox>

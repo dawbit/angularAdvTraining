@@ -1,16 +1,22 @@
 # GIT
+
 cd ..
 git clone https://bitbucket.org/ev45ive/testarmy-angular-adv-wasko.git testarmy-angular-adv-wasko
 cd testarmy-angular-adv-wasko
+
 <!-- File -> Opern Folder -> testarmy-angular-adv-wasko , albo : -->
+
 code .
-npm i 
+npm i
 npm start
 
 ## GIT Update
+
 git stash -u && git pull
-npm i 
+npm i
+
 # Instalacje
+
 node -v
 v14.17.0
 
@@ -30,6 +36,7 @@ x64
 chrome
 
 ## VS Code Extensions
+
 https://marketplace.visualstudio.com/items?itemName=Angular.ng-template
 https://marketplace.visualstudio.com/items?itemName=Mikael.Angular-BeastCode
 https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console
@@ -38,33 +45,41 @@ https://marketplace.visualstudio.com/items?itemName=adrianwilczynski.switcher
 https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
 https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
 
+## Chrome extensions
+
+https://chrome.google.com/webstore/detail/angular-devtools/ienfalfjdbdpebioblfackkekamfmbnh
+
 # New project
+
 npm install --global nx create-nx-workspace
 npx create-nx-workspace --preset=angular
 
 <!-- or -->
+
 ng new angular-cli-app
 ng add @nrwl/workspace
 
 create-nx-workspace wasko
 √ What to create in the new workspace · angular
-√ Application name                    · waskoadv
-√ Default stylesheet format           · scss
+√ Application name · waskoadv
+√ Default stylesheet format · scss
 √ Use Nx Cloud? (It's free and doesn't require registration.) · No
 
->  NX  Nx is creating your workspace.
+> NX Nx is creating your workspace.
 
-  To make sure the command works reliably in all environments, and that the preset is applied correctly,
-  Nx will run "npm install" several times. Please wait.
+To make sure the command works reliably in all environments, and that the preset is applied correctly,
+Nx will run "npm install" several times. Please wait.
 
 ⠦ Installing dependencies with npm
 ✔ Nx has successfully created the workspace.
 
 # UI Component Kit
+
 https://material.angular.io/components/categories
 https://material.io/design
 
 <!-- enterprise  -->
+
 https://js.devexpress.com/Documentation/Guide/Angular_Components/DevExtreme_Angular_Components/
 https://www.telerik.com/kendo-angular-ui-b
 
@@ -73,8 +88,8 @@ https://ng.ant.design/components/modal/en
 
 https://ng-bootstrap.github.io/#/components/accordion/examples
 
-
 ## Material Design
+
 ng add @angular/material
 ℹ Using package manager: npm
 ✔ Found compatible package version: @angular/material@12.1.0.
@@ -83,25 +98,28 @@ ng add @angular/material
 The package @angular/material@12.1.0 will be installed and executed.
 Would you like to proceed? Yes
 ✔ Package successfully installed.
-? Choose a prebuilt theme name, or "custom" for a custom theme: Indigo/Pink        
+? Choose a prebuilt theme name, or "custom" for a custom theme: Indigo/Pink  
 [ Preview: https://material.angular.io?theme=indigo-pink ]
-? Set up global Angular Material typography styles? Yes 
+? Set up global Angular Material typography styles? Yes
 ? Set up browser animations for Angular Material? Yes
 UPDATE package.json (2477 bytes)
 ✔ Packages installed successfully.
-    Your project is not using the default builders for "test". This means that we cannot add the configured theme to the "test" target.
+Your project is not using the default builders for "test". This means that we cannot add the configured theme to the "test" target.
 UPDATE apps/waskoadv/src/app/app.module.ts (403 bytes)
 UPDATE angular.json (4551 bytes)
 UPDATE apps/waskoadv/src/index.html (614 bytes)
 UPDATE apps/waskoadv/src/styles.scss (181 bytes)
 
 ## Core vs Shared module
+
 <!-- core - services, config, API... -->
- ng generate @schematics/angular:module --name=core --module=app --no-interactive 
+
+ng generate @schematics/angular:module --name=core --module=app --no-interactive
 CREATE apps/waskoadv/src/app/core/core.module.ts
 UPDATE apps/waskoadv/src/app/app.module.ts
 
 <!-- Feature -->
+
 ng generate @schematics/angular:module --name=features/playlists --module=app --route=playlists
 
 CREATE apps/waskoadv/src/app/features/playlists/playlists-routing.module.ts
@@ -113,7 +131,8 @@ CREATE apps/waskoadv/src/app/features/playlists/playlists.component.css
 UPDATE apps/waskoadv/src/app/app.module.ts
 
 <!-- shared - components, directives, toolkits... -->
-ng generate @schematics/angular:module --name=shared --module=app --no-interactive 
+
+ng generate @schematics/angular:module --name=shared --module=app --no-interactive
 CREATE apps/waskoadv/src/app/shared/shared.module.ts
 UPDATE apps/waskoadv/src/app/app.module.ts
 
@@ -126,11 +145,12 @@ CREATE apps/waskoadv/src/app/shared/containers/navbar/navbar.component.scss
 UPDATE apps/waskoadv/src/app/shared/shared.module.ts
 
 ## Storybook
+
 npm i @nrwl/storybook
 ng generate @nrwl/angular:storybook-configuration --name=waskoadv --no-configureCypress --no-generateCypressSpecs --no-generateStories --no-interactive --dry-run <
 
-adding .storybook folder to the root directory - 
-     based on the Storybook version installed (v6), we'll bootstrap a scaffold for that particular version.
+adding .storybook folder to the root directory -
+based on the Storybook version installed (v6), we'll bootstrap a scaffold for that particular version.
 adding .storybook folder to app - using Storybook version 6
 UPDATE package.json
 UPDATE angular.json
@@ -145,7 +165,10 @@ CREATE apps/waskoadv/.storybook/webpack.config.js
 UPDATE apps/waskoadv/tsconfig.app.json
 UPDATE apps/waskoadv/tsconfig.json
 
+npx sb upgrade
+
 ## Stories
+
 https://storybook.js.org/docs/angular/get-started/whats-a-story
 
 https://github.com/juristr/nx-shared-storybook
@@ -153,25 +176,28 @@ https://github.com/juristr/nx-shared-storybook
 https://storybook.js.org/tutorials/intro-to-storybook/angular/en/composite-component/
 npm install --save-dev @storybook/addon-essentials
 
-
 ## Playlists components
 
-ng g c features/playlists/containers/playlists-view 
+ng g c features/playlists/containers/playlists-view
 ng g c features/playlists/components/playlist-list
-ng g c features/playlists/components/playlist-list-item 
-ng g c features/playlists/components/playlist-details 
-ng g c features/playlists/components/playlist-form  
+ng g c features/playlists/components/playlist-list-item
+ng g c features/playlists/components/playlist-details
+ng g c features/playlists/components/playlist-form
 
 ## Playlist shared sub-module
+
 ng g m features/playlists/shared/playlist-shared -m shared
 ng g c features/playlists/shared/playlist-shared/containers/add-to-playlist --export
+
 <!-- + re-export from shared -->
 
 ## CSS
+
 https://getbootstrap.com (scss)
 https://tailwindcss.com https://medium.com/ngconf/angular-and-tailwindcss-6438e3326273
 
 ## Flex Layout
+
 https://github.com/angular/flex-layout
 npm i -s @angular/flex-layout @angular/cdk
 
@@ -179,3 +205,24 @@ https://github.com/angular/flex-layout/wiki/Declarative-API-Overview
 https://github.com/angular/flex-layout/wiki/Responsive-API
 
 https://github.com/angular/flex-layout/wiki/fxLayoutGap-API
+
+## Change detection - clock
+
+ng generate @schematics/angular:component --name=shared/containers/clock --module=shared --style=scss --changeDetection=OnPush --export --inlineStyle --inlineTemplate --skipTests --no-interactive
+
+CREATE apps/waskoadv/src/app/shared/containers/clock/clock.component.ts
+UPDATE apps/waskoadv/src/app/shared/shared.module.ts
+
+## Schema validation and transformation
+
+https://github.com/colinhacks/zod
+https://github.com/colinhacks/zod#comparison
+https://github.com/typestack/class-validator
+https://github.com/typestack/class-transformer
+
+## Components collaboration
+ng g m shared/modules/tabs -m shared 
+ng g c shared/modules/tabs/components/tabs-group  --export
+ng g c shared/modules/tabs/components/tab  --export
+
+

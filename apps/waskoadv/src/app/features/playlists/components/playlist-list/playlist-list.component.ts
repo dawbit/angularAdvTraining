@@ -1,5 +1,5 @@
 import { NgForOf, NgForOfContext } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Playlist } from 'apps/waskoadv/src/app/core/model/Playlist';
 
 NgForOf
@@ -7,10 +7,12 @@ NgForOfContext
 @Component({
   selector: 'wasko-playlist-list',
   templateUrl: './playlist-list.component.html',
-  styleUrls: ['./playlist-list.component.scss']
+  styleUrls: ['./playlist-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlaylistListComponent implements OnInit {
 
+  // oldplaylists === newplaylists
   @Input() playlists: Playlist[] = []
 
   @Input() selected?: Playlist['id'];

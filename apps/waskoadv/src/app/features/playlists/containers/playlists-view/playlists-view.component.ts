@@ -1,10 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { Playlist } from 'apps/waskoadv/src/app/core/model/Playlist';
 
 @Component({
   selector: 'wasko-playlists-view',
   templateUrl: './playlists-view.component.html',
-  styleUrls: ['./playlists-view.component.scss']
+  styleUrls: ['./playlists-view.component.scss'],
+  // providers: [
+  //     {
+  //       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+  //       useValue: {
+  //         appearance: 'fill', 
+  //         hideRequiredMarker: false
+  //       }
+  //     }
+  //   ]
 })
 export class PlaylistsViewComponent implements OnInit {
 
@@ -42,6 +52,13 @@ export class PlaylistsViewComponent implements OnInit {
   savePlaylist(draft: Playlist) {
     console.log(draft);
 
+    // Mutable - OnPush won't detect change!!!
+    // const index = this.playlists.findIndex(p => p.id === draft.id)
+    // if(index !== -1)
+    // this.playlists.splice(index, 1, draft)
+    
+    // Immutable - OnPush will detect change
+    this.playlists = this.playlists.map(p => p.id === draft.id ? draft : p)
   }
 
   constructor() { }

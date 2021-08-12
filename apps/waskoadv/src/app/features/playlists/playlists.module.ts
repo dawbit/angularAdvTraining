@@ -8,6 +8,7 @@ import { PlaylistListItemComponent } from './components/playlist-list-item/playl
 import { PlaylistDetailsComponent } from './components/playlist-details/playlist-details.component';
 import { PlaylistFormComponent } from './components/playlist-form/playlist-form.component';
 import { SharedModule } from '../../shared/shared.module';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 
 const routes: Routes = [
@@ -37,6 +38,15 @@ const routes: Routes = [
   ],
   exports: [
     PlaylistsViewComponent,
+  ],
+  providers: [
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: {
+        appearance: 'standard',
+        hideRequiredMarker: false
+      }
+    }
   ]
 })
 export class PlaylistsModule { }
