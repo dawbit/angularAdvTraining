@@ -6,6 +6,7 @@ import { MusicSearchViewComponent } from './containers/music-search-view/music-s
 import { SearchFormComponent } from './components/search-form/search-form.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { AlbumCardComponent } from './components/album-card/album-card.component';
+import { SharedModule } from '../../shared/shared.module';
 
 
 const routes: Routes = [
@@ -24,10 +25,11 @@ const routes: Routes = [
     MusicSearchViewComponent,
     SearchFormComponent,
     SearchResultsComponent,
-    AlbumCardComponent
+    AlbumCardComponent,
   ],
   imports: [
     CommonModule,
+    SharedModule,
     RouterModule.forChild(routes)
   ],
   providers:[

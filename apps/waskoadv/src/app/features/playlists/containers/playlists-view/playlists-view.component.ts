@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { Playlist } from 'apps/waskoadv/src/app/core/model/Playlist';
 
+enum Modes {
+  details = 'details',
+  edit = 'edit'
+}
 @Component({
   selector: 'wasko-playlists-view',
   templateUrl: './playlists-view.component.html',
@@ -18,7 +22,8 @@ import { Playlist } from 'apps/waskoadv/src/app/core/model/Playlist';
 })
 export class PlaylistsViewComponent implements OnInit {
 
-  mode: 'details' | 'edit' = 'details'
+  mode: Modes = Modes.details
+  // mode: 'details' | 'edit' = Modes.details
 
   playlists: Playlist[] = [{
     id: '123',
@@ -47,8 +52,8 @@ export class PlaylistsViewComponent implements OnInit {
     this.selectedPlaylist = this.playlists.find(p => p.id === playlist_id)
   }
 
-  editMode() { this.mode = 'edit' }
-  detailsMode() { this.mode = 'details' }
+  editMode() { this.mode = Modes.edit }
+  detailsMode() { this.mode = Modes.details }
 
   savePlaylist(draft: Playlist) {
     console.log(draft);

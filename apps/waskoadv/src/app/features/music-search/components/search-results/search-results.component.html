@@ -1,1 +1,16 @@
-<p>search-results works!</p>
+<div
+  fxLayout="row wrap"
+  fxLayout.lt-sm="col"
+  fxLayoutAlign="start"
+  fxLayoutGap="16px"
+>
+  <ng-container *ngFor="let result of [1, 2, 3, 4, 5, 6]" >
+    <wasko-album-card fxFlex="0 1 calc(100% / 4 - 16px)" class="card-wrap-gap"></wasko-album-card>
+  </ng-container>
+</div>
+
+<style>
+    .card-wrap-gap{
+        margin-bottom: 1em;
+    }
+</style>

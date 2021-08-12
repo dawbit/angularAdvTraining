@@ -1,4 +1,3 @@
-import { environment } from "apps/waskoadv/src/environments/environment"
 
 interface Track {
   id: string;
@@ -14,7 +13,19 @@ export interface Playlist {
   description: string;
   tracks?: Track[]
 }
+// instanceof Playlist // Error - Playlist is undefined
 
+// class PlaylistImpl {
+//   constructor(
+//     public id: string,
+//     public name: string,
+//     public public: boolean,
+//     public type: 'playlist',
+//     public description: string,
+//     public tracks?: Track[]
+//   ) { }
+// }
+// instanceof PlaylistImpl // this works!
 
 // const p: Playlist = {} as Playlist
 // // p.tracks.length // Object is possibly 'undefined'

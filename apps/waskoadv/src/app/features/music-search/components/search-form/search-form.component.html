@@ -1,1 +1,14 @@
-<p>search-form works!</p>
+<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+  <mat-form-field fxFlex="1 1 100">
+    <mat-label>Search</mat-label>
+
+    <input type="text" matInput />
+
+    <mat-hint></mat-hint>
+    <mat-error>error</mat-error>
+  </mat-form-field>
+
+  <button mat-fab color="primary">
+    <mat-icon>search</mat-icon>
+  </button>
+</div>
