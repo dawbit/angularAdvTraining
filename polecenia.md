@@ -235,3 +235,22 @@ ng g c features/music-search/components/search-form
 ng g c features/music-search/components/search-results
 ng g c features/music-search/components/album-card
 
+
+## CSS Grid
+https://css-tricks.com/snippets/css/complete-guide-grid/
+https://github.com/angular/flex-layout/wiki/API-Documentation
+
+## Quicktype
+https://marketplace.visualstudio.com/items?itemName=quicktype.quicktype
+
+## Mock Service WOrker
+https://mswjs.io/docs/getting-started/mocks/rest-api
+npm i -D msw
+
+npx msw init apps/waskoadv/src/ --save
+
+ng g m core/fixtures -m app
+
+## Services
+
+ng g s core/api/music-search

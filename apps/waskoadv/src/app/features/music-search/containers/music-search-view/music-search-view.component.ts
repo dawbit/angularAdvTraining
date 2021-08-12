@@ -27,7 +27,7 @@ export class MusicSearchViewComponent implements OnInit {
   ngOnInit(): void { }
 
   searchAlbums(event: SearchFormEvent) {
-    
+
     const obs = this.service.getResults(event.query)
 
     const sub: Subscription  = obs.subscribe({
