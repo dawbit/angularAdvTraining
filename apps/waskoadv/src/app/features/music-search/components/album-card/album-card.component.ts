@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { AlbumView } from 'apps/waskoadv/src/app/core/model/Search';
 
 @Component({
   selector: 'wasko-album-card',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AlbumCardComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+  album!: AlbumView;
 
+  constructor() {
+  }
+  
   ngOnInit(): void {
+    if (!this.album) throw new Error('Missing input')
   }
 
 }

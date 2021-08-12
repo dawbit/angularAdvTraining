@@ -1,14 +1,35 @@
-<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
-  <mat-form-field fxFlex="1 1 100">
+<form
+  fxLayout="row"
+  fxLayoutAlign="start center"
+  fxLayoutGap="20px"
+  [formGroup]="form"
+  (ngSubmit)="submit($event)"
+>
+  <mat-form-field fxFlex="1 1 80" *ngIf="form.get('query') as field">
     <mat-label>Search</mat-label>
 
-    <input type="text" matInput />
+    <!-- <input type="text" matInput [formControl]="form.controls.query"/> -->
+    <!-- <input type="text" matInput [formControl]="form.get('query')"/> -->
+    <!-- <input type="text" matInput [formControl]="field"/> -->
+    <!-- <input type="text" matInput [formControl]="$any(field)"/> -->
+    <!-- <input type="text" matInput [formControl]="queryField"/> -->
+    <input type="text" matInput formControlName="query" />
 
     <mat-hint></mat-hint>
     <mat-error>error</mat-error>
   </mat-form-field>
 
-  <button mat-fab color="primary">
+  <mat-form-field fxFlex="1 1 20">
+    <mat-select matInput formControlName="type" >
+      <mat-option value="album">Album</mat-option>
+      <mat-option value="artist">Artist</mat-option>
+    </mat-select>
+
+    <mat-hint></mat-hint>
+    <mat-error>error</mat-error>
+  </mat-form-field>
+
+  <button mat-fab color="primary" type="submit">
     <mat-icon>search</mat-icon>
   </button>
-</div>
+</form>

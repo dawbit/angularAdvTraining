@@ -9,13 +9,13 @@ import { Playlist } from 'apps/waskoadv/src/app/core/model/Playlist';
   styleUrls: ['./playlist-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
-    {
-      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
-      useValue: {
-        appearance: 'standard', 
-        hideRequiredMarker: false
-      }
-    }
+    // {
+    //   provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+    //   useValue: {
+    //     appearance: 'standard', 
+    //     hideRequiredMarker: false
+    //   }
+    // }
   ]
 })
 export class PlaylistFormComponent implements OnInit {

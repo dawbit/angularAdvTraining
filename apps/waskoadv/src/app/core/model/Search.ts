@@ -4,8 +4,13 @@ export interface AlbumsResponse {
     albums: Album[];
 }
 
+export interface Entity{
+    id:                     string;
+    name:                   string;
+}
+
 // https://developer.spotify.com/documentation/web-api/reference/#object-albumobject
-export interface Album {
+export interface Album extends Entity{
     album_type:             string;
     artists:                Artist[];
     available_markets:      string[];
@@ -14,15 +19,20 @@ export interface Album {
     external_urls:          ExternalUrls;
     genres:                 any[];
     href:                   string;
-    id:                     string;
     images:                 Image[];
-    name:                   string;
     popularity:             number;
     release_date:           Date;
     release_date_precision: string;
     tracks:                 PagingObject<Track>;
     type:                   'album';
     uri:                    string;
+}
+
+
+export interface AlbumView extends Entity{
+    images:                 Image[];
+    type:                   'album';
+    // enableVisualFireworks: boolean
 }
 
 export interface Artist {

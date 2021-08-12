@@ -8,9 +8,11 @@ import { CoreModule } from './core/core.module';
 
 import { RouterModule, Routes } from '@angular/router';
 import { PlaylistsModule } from './features/playlists/playlists.module';
+import { FixturesModule } from './core/fixtures/fixtures.module';
+import { environment } from '../environments/environment';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/playlists', pathMatch: 'full' },
+  { path: '', redirectTo: '/music-search', pathMatch: 'full' },
   { path: 'playlists', loadChildren: () => import('./features/playlists/playlists.module').then(m => m.PlaylistsModule) },
   { path: 'experiments', loadChildren: () => import('./features/experiments/experiments.module').then(m => m.ExperimentsModule) },
   { path: 'music-search', loadChildren: () => import('./features/music-search/music-search.module').then(m => m.MusicSearchModule) },
@@ -24,13 +26,20 @@ export const routes: Routes = [
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    CoreModule,
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
     SharedModule,
-    CoreModule
+    // Treeshakeable
+    environment.production ? [] : [FixturesModule]
   ],
-  providers: [],
+  providers: [
+    // {
+    //   provide: 'API_URL',
+    //   useValue: 'https://api.spotify.com/v1/'
+    // }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

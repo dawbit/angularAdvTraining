@@ -1,6 +1,6 @@
 <mat-card>
   <img
-    src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+    [src]="album.images[0].url"
     mat-card-image
   />
 
@@ -10,10 +10,10 @@
      -->
 
   <mat-card-header>
-    <mat-card-title>Test</mat-card-title>
+    <mat-card-title>{{album.name}}</mat-card-title>
   </mat-card-header>
 
-  <mat-card-actions align="end">
+  <!-- <mat-card-actions align="end">
     <button mat-button color="accent">Details</button>
-  </mat-card-actions>
+  </mat-card-actions> -->
 </mat-card>

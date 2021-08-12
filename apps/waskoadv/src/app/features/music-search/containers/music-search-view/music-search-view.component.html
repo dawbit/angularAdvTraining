@@ -1,9 +1,9 @@
 <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
     <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="20px" fxFlex="1 1 80">
 
-        <wasko-search-form></wasko-search-form>
+        <wasko-search-form (search)="searchAlbums($event)"></wasko-search-form>
 
-        <wasko-search-results></wasko-search-results>
+        <wasko-search-results [results]="results"></wasko-search-results>
     
     </div>
     

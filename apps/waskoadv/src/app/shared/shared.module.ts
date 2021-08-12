@@ -13,7 +13,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import {
   MatCardModule
 } from '@angular/material/card';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PlaylistSharedModule } from '../features/playlists/shared/playlist-shared/playlist-shared.module';
 import { ClockComponent } from './containers/clock/clock.component';
@@ -21,7 +21,7 @@ import { YesnoPipe } from './pipes/yesno.pipe';
 import { CensorDirective } from './directives/censor.directive';
 import { TabsModule } from './modules/tabs/tabs.module';
 import { SelectableListOptionComponent } from './components/selectable-list-option/selectable-list-option.component';
-
+import { MatSelectModule } from '@angular/material/select'
 
 @NgModule({
   declarations: [NavbarComponent, ClockComponent, YesnoPipe, CensorDirective, SelectableListOptionComponent],
@@ -38,9 +38,10 @@ import { SelectableListOptionComponent } from './components/selectable-list-opti
     MatInputModule,
     MatCheckboxModule,
     FormsModule,
+    ReactiveFormsModule,
     PlaylistSharedModule,
     TabsModule,
-    MatCardModule
+    MatCardModule, MatSelectModule
   ],
   exports: [
     NavbarComponent,
@@ -53,13 +54,14 @@ import { SelectableListOptionComponent } from './components/selectable-list-opti
     MatInputModule,
     MatCheckboxModule,
     FormsModule,
+    ReactiveFormsModule,
     PlaylistSharedModule,
     ClockComponent,
     YesnoPipe,
     CensorDirective,
     TabsModule,
     MatCardModule,
-    SelectableListOptionComponent
+    SelectableListOptionComponent, MatSelectModule
   ]
 })
 export class SharedModule { }
