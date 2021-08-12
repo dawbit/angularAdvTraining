@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from './core/services/auth.service';
 
 @Component({
@@ -9,11 +10,25 @@ import { AuthService } from './core/services/auth.service';
 export class AppComponent {
   title = 'waskoadv';
 
-  login() {
-    this.auth.login()
+  async login() {
+    try{
+      await this.auth.login()
+      this.showMessage('Logged in')
+
+    }catch(error){
+      this.showMessage(error.params?.error || 'Cancelled')
+    }
   }
 
-  constructor(private auth: AuthService) {
+  constructor(private auth: AuthService,
+    private _snackBar: MatSnackBar) {
 
+  }
+
+
+  showMessage(message: string, action: string = '') {
+    this._snackBar.open(message, action, {
+      duration: 2000
+    });
   }
 }
