@@ -26,10 +26,10 @@ export const routes: Routes = [
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    RouterModule.forRoot(routes),
     CoreModule,
     BrowserModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(routes),
     SharedModule,
     // Treeshakeable
     // environment.production ? [] : [FixturesModule]

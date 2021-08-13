@@ -97,7 +97,9 @@ export interface Playlist {
 //   | { key: string, value: { text: string } }
 //   | { key: number, value: { number: number } }
 
-// === ''
-// typeof === '' 
+
+// Type Guards
+// === '' // value
+// typeof === ''  // primitive type
+// instanceof SomeClass // class type
 // 'key' in result
-// instanceof SomeClass

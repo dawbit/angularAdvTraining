@@ -1,19 +1,26 @@
-import { NgModule } from '@angular/core';
+import { Inject, ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AlbumView } from './model/Search';
 import { API_URL_TOKEN, INITIAL_RESULTS_TOKEN } from './tokens';
 import { MusicSearchService } from './api/music-search.service';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { AuthService } from './services/auth.service';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { ROUTES } from '@angular/router';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
     HttpClientModule,
-    OAuthModule.forRoot()
+    OAuthModule.forRoot({
+      resourceServer: {
+        sendAccessToken: true,
+        // allowedUrls:[ 'http://api.spotify...']
+      }
+    })
   ],
   providers: [
     // {
@@ -25,6 +32,12 @@ import { AuthService } from './services/auth.service';
     //   provide: 'INITIAL_RESULTS',
     //   useValue: []
     // },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true // collect, not override
+      // useExisting: ErrorInterceptor // if also injected elsewhere
+    },
     {
       provide: API_URL_TOKEN,
       useValue: environment.api_url
@@ -63,9 +76,24 @@ import { AuthService } from './services/auth.service';
 })
 export class CoreModule {
 
-  constructor(private auth: AuthService) {
-    auth.init()
+  constructor(
+    private auth: AuthService,
+    @Inject(HTTP_INTERCEPTORS) interceptors: any,
+    @Inject(ROUTES) routes: any
 
+  ) {
+    auth.init()
+    // console.log(interceptors);
+    console.log(routes); // RouterModule.forRoot(), RouterModule.forChild(), provideRoutes, or Router.resetConfig().
+  }
+
+  static forRoot(config = { placki: false }): ModuleWithProviders<CoreModule> {
+    return {
+      ngModule: CoreModule,
+      providers: [
+
+      ]
+    }
   }
 }
 
