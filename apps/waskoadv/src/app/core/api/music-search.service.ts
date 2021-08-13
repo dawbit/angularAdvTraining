@@ -1,13 +1,16 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { EventEmitter } from '@angular/core';
 import { ErrorHandler, Inject, Injectable, Optional } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { from } from 'rxjs';
+import { BehaviorSubject, from, merge, Subject } from 'rxjs';
 import { NEVER } from 'rxjs';
+import { AsyncSubject } from 'rxjs';
+import { ReplaySubject } from 'rxjs';
 import { throwError } from 'rxjs';
 import { EMPTY } from 'rxjs';
 import { Observable, ObservableInput } from 'rxjs';
-import { catchError, map, pluck } from 'rxjs/operators';
-import { Album, AlbumsSearchResponse, AlbumView, isSpotifyError, SearchResponse } from '../model/Search';
+import { catchError, concatAll, exhaust, filter, map, mergeAll, pluck, switchAll, switchMap, tap } from 'rxjs/operators';
+import { Album, AlbumsSearchResponse, AlbumView, isSearchResponse, isSpotifyError, SearchResponse, validateAlbumsSearchResponse, validateSearchResponse } from '../model/Search';
 import { AuthService } from '../services/auth.service';
 import { API_URL_TOKEN, INITIAL_RESULTS_TOKEN } from '../tokens';
 // import { MusicSearchModule } from '../../features/music-search/music-search.module';
@@ -20,35 +23,61 @@ import { API_URL_TOKEN, INITIAL_RESULTS_TOKEN } from '../tokens';
 })
 export class MusicSearchService {
 
-  results: AlbumView[] = []
+  protected query = new ReplaySubject<string>(3)
+  protected results = new BehaviorSubject<AlbumView[]>([])
+
+  queryChange = this.query.asObservable()
+  resultsChange = this.results.asObservable()
 
   constructor(
     private http: HttpClient,
     private auth: AuthService,
 
     @Inject(API_URL_TOKEN) private api_url: string,
-    @Optional() @Inject(INITIAL_RESULTS_TOKEN) initial: AlbumView[] | null
+    @Optional() @Inject(INITIAL_RESULTS_TOKEN) private initial: AlbumView[] | null
   ) {
-    this.results = initial || []
+    this.results.next(this.initial || [])
+
+    this.query.pipe(
+      // map(query => this.fetchResults(query)),
+      switchMap(query => this.fetchResults(query)),
+      // o => o, // Observable<Observable<Album[]>>
+      // mergeAll() // parallel
+      // concatAll(), // sequence
+      // exhaust() // exhaust first first, ignore meanwhile
+      // switchAll() // unsubscribe current if theres new one
+    ).subscribe({
+      next: results => this.results.next(results),
+      error: (error: unknown) => { },
+      complete: () => console.log('complete'),
+    })
+
+    // this.query.subscribe(query => {
+    //   const obs = this.fetchResults(query)
+    //   obs.subscribe({
+    //     next: results => this.results.next(results),
+    //     error: (error: unknown) => { },
+    //     complete: () => console.log('complete'),
+    //   })
+    // })
   }
 
+  searchAlbums(query: string): void {
+    this.query.next(query)
+  }
 
-
-  getResults(query: string): Observable<Album[]> {
-
-    return this.http.get<SearchResponse<Album>>(`${this.api_url}/search`, {
+  private fetchResults(query: string) {
+    return this.http.get<unknown>(`${this.api_url}/search`, {
       params: {
         query: query,
         type: 'album'
       },
     }).pipe(
-
-      map(res => res.albums.items),
-      // catchError((error, caught): ObservableInput<Album[]> => {
-
-      // })
-    )
-
-
+      map(res => {
+        validateAlbumsSearchResponse(res);
+        return res;
+      }),
+      map(res => res.albums.items)
+    );
   }
 }

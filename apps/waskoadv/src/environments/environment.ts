@@ -15,7 +15,7 @@ export const environment = {
     oidc: false,
 
     customQueryParams: {
-      show_dialog: 'true'
+      // show_dialog: 'true'
     },
 
     loginUrl: 'https://accounts.spotify.com/authorize',

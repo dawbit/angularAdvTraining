@@ -22,10 +22,11 @@ import { CensorDirective } from './directives/censor.directive';
 import { TabsModule } from './modules/tabs/tabs.module';
 import { SelectableListOptionComponent } from './components/selectable-list-option/selectable-list-option.component';
 import { MatSelectModule } from '@angular/material/select'
-import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { RecentSearchesComponent } from './containers/recent-searches/recent-searches.component'
 
 @NgModule({
-  declarations: [NavbarComponent, ClockComponent, YesnoPipe, CensorDirective, SelectableListOptionComponent],
+  declarations: [NavbarComponent, ClockComponent, YesnoPipe, CensorDirective, SelectableListOptionComponent, RecentSearchesComponent],
   imports: [
     CommonModule,
     LayoutModule,
@@ -62,7 +63,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar'
     CensorDirective,
     TabsModule,
     MatCardModule,
-    SelectableListOptionComponent, MatSelectModule, MatSnackBarModule
+    SelectableListOptionComponent, MatSelectModule, MatSnackBarModule, RecentSearchesComponent
   ]
 })
 export class SharedModule { }
