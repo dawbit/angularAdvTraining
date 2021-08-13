@@ -7,7 +7,7 @@ import { throwError } from 'rxjs';
 import { EMPTY } from 'rxjs';
 import { Observable, ObservableInput } from 'rxjs';
 import { catchError, map, pluck } from 'rxjs/operators';
-import { Album, AlbumsSearchResponse, AlbumView, isSpotifyError } from '../model/Search';
+import { Album, AlbumsSearchResponse, AlbumView, isSpotifyError, SearchResponse } from '../model/Search';
 import { AuthService } from '../services/auth.service';
 import { API_URL_TOKEN, INITIAL_RESULTS_TOKEN } from '../tokens';
 // import { MusicSearchModule } from '../../features/music-search/music-search.module';
@@ -36,7 +36,7 @@ export class MusicSearchService {
 
   getResults(query: string): Observable<Album[]> {
 
-    return this.http.get<AlbumsSearchResponse>(`${this.api_url}/search`, {
+    return this.http.get<SearchResponse<Album>>(`${this.api_url}/search`, {
       params: {
         query: query,
         type: 'album'
