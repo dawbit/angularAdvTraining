@@ -31,42 +31,27 @@ export class MusicSearchService {
 
   constructor(
     private http: HttpClient,
-    private auth: AuthService,
 
     @Inject(API_URL_TOKEN) private api_url: string,
     @Optional() @Inject(INITIAL_RESULTS_TOKEN) private initial: AlbumView[] | null
   ) {
     this.results.next(this.initial || [])
 
+    ;(window as any).subject = this.query
+
     this.query.pipe(
-      // map(query => this.fetchResults(query)),
       switchMap(query => this.fetchResults(query)),
-      // o => o, // Observable<Observable<Album[]>>
-      // mergeAll() // parallel
-      // concatAll(), // sequence
-      // exhaust() // exhaust first first, ignore meanwhile
-      // switchAll() // unsubscribe current if theres new one
     ).subscribe({
       next: results => this.results.next(results),
-      error: (error: unknown) => { },
-      complete: () => console.log('complete'),
+      // error: (error: unknown) => { },
     })
-
-    // this.query.subscribe(query => {
-    //   const obs = this.fetchResults(query)
-    //   obs.subscribe({
-    //     next: results => this.results.next(results),
-    //     error: (error: unknown) => { },
-    //     complete: () => console.log('complete'),
-    //   })
-    // })
   }
 
   searchAlbums(query: string): void {
     this.query.next(query)
   }
 
-  private fetchResults(query: string) {
+  fetchResults(query: string) {
     return this.http.get<unknown>(`${this.api_url}/search`, {
       params: {
         query: query,
