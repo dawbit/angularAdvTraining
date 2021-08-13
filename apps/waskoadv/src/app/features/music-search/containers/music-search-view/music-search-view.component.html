@@ -5,31 +5,15 @@
     fxLayoutGap="20px"
     fxFlex="1 1 80"
   >
-
-    <wasko-search-form (search)="searchAlbums($event)"></wasko-search-form>
-
-    <wasko-recent-searches></wasko-recent-searches>
-
-
-    <button mat-button (click)="connect()">Connect</button>
-
-    <!-- <p>{{message}}</p> -->
-    <ng-container *ngIf="results | async as albums">
-        <p>Found {{ albums.length }} results</p>
-  
-        <wasko-search-results [results]="albums"></wasko-search-results>
-      </ng-container>
+    <wasko-search-form
+      [query]="query | async"
+      (search)="searchAlbums($event)"
+    ></wasko-search-form>
 
     <ng-container *ngIf="results | async as albums">
       <p>Found {{ albums.length }} results</p>
 
       <wasko-search-results [results]="albums"></wasko-search-results>
     </ng-container>
-
-    <!-- Never use Async with dynamic Observable factories -->
-    <!-- <ng-container *ngIf="getNewObservable(query) | async as albums"> -->
-
-    <!-- <p>Found {{ (results | async)?.length }} results </p>
-        <wasko-search-results [results]="(results | async) || []"></wasko-search-results> -->
   </div>
 </div>

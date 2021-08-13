@@ -1,5 +1,6 @@
 import { ChangeDetectorRef } from '@angular/core';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { scan } from 'rxjs/operators';
 import { MusicSearchService } from '../../../core/api/music-search.service';
 
 @Component({
@@ -10,28 +11,24 @@ import { MusicSearchService } from '../../../core/api/music-search.service';
 })
 export class RecentSearchesComponent implements OnInit {
 
-  queries: string[] = []
+  queries = this.service.queryChange.pipe(
+    scan((queries, query) => {
+      queries.push(query)
+      queries = queries.slice(-3)
+      return queries
+    }, [] as string[])
+  )
 
   constructor(
-    private cdr: ChangeDetectorRef,
     private service: MusicSearchService
-  ) {
+  ) { }
 
-  }
-  
-  search(query: string){
+  search(query: string) {
     this.service.searchAlbums(query)
   }
-  
-  ngOnInit(): void {
-    // this.queries = this.service.queries
-    // this.queries = this.queries.slice(-3)
 
-    this.service.queryChange.subscribe(query => {
-      this.queries.push(query)
-      this.queries = this.queries.slice(-3)
-      this.cdr.markForCheck()
-    })
+  ngOnInit(): void {
+
   }
 
 }

@@ -2,13 +2,15 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectionStrategy, ErrorHandler } from '@angular/core';
 import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { MusicSearchService } from 'apps/waskoadv/src/app/core/api/music-search.service';
 import { Album, AlbumView, isSpotifyError, SpotifyError } from 'apps/waskoadv/src/app/core/model/Search';
 import { API_URL_TOKEN, INITIAL_RESULTS_TOKEN } from 'apps/waskoadv/src/app/core/tokens';
 import { environment } from 'apps/waskoadv/src/environments/environment';
-import { ConnectableObservable, Subject } from 'rxjs';
+import { BehaviorSubject, ConnectableObservable, Subject } from 'rxjs';
 import { Subscription } from 'rxjs';
-import { multicast, take, takeUntil, takeWhile, tap } from 'rxjs/operators';
+import { filter, map, multicast, publish, publishReplay, refCount, share, shareReplay, switchMap, take, takeUntil, takeWhile, tap } from 'rxjs/operators';
 import { SearchFormEvent } from '../../components/search-form/search-form.component';
 
 
@@ -26,24 +28,30 @@ export class MusicSearchViewComponent implements OnInit {
   results = this.service.resultsChange
   query = this.service.queryChange
 
-  constructor(private service: MusicSearchService) { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private service: MusicSearchService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    // const q = this.route.snapshot.queryParamMap.get('q');
+    // q && this.service.searchAlbums(q)
 
-  searchAlbums(event: SearchFormEvent) {
-    // this.service.searchAlbums(event.query)
-
-
-    // Convert Unicast to Multicast
-    this.results = this.service.fetchResults(event.query).pipe(
-      multicast(new Subject())
+    this.route.queryParamMap.pipe(
+      map(q => q.get('q')),
+      filter((q): q is string => q != ''),
+      // switchMap(q => this.service.fetchResults(q)), share() // + asyncPipe
     )
-
+      .subscribe(q => this.service.searchAlbums(q))
   }
 
-  connect() {
+  searchAlbums(event: SearchFormEvent) {
+    // this.router.navigate(['/music-search'], {
 
-    ; (this.results as ConnectableObservable<AlbumView[]>).connect()
+    this.router.navigate([], {
+      queryParams: { q: event.query, type: event.type },
+      relativeTo: this.route
+    })
   }
 
 }

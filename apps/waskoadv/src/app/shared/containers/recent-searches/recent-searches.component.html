@@ -1,6 +1,6 @@
 
 <mat-list>
-    <mat-list-item *ngFor="let query of queries" (click)="search(query)">
+    <mat-list-item *ngFor="let query of queries | async" (click)="search(query)">
         {{query}}
     </mat-list-item>
 </mat-list>
