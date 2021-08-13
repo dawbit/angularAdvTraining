@@ -6,9 +6,9 @@ import { MusicSearchService } from 'apps/waskoadv/src/app/core/api/music-search.
 import { Album, AlbumView, isSpotifyError, SpotifyError } from 'apps/waskoadv/src/app/core/model/Search';
 import { API_URL_TOKEN, INITIAL_RESULTS_TOKEN } from 'apps/waskoadv/src/app/core/tokens';
 import { environment } from 'apps/waskoadv/src/environments/environment';
-import { Subject } from 'rxjs';
+import { ConnectableObservable, Subject } from 'rxjs';
 import { Subscription } from 'rxjs';
-import { take, takeUntil, takeWhile } from 'rxjs/operators';
+import { multicast, take, takeUntil, takeWhile, tap } from 'rxjs/operators';
 import { SearchFormEvent } from '../../components/search-form/search-form.component';
 
 
@@ -16,42 +16,34 @@ import { SearchFormEvent } from '../../components/search-form/search-form.compon
   selector: 'wasko-music-search-view',
   templateUrl: './music-search-view.component.html',
   styleUrls: ['./music-search-view.component.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
   // providers:[]
 })
 export class MusicSearchViewComponent implements OnInit {
+  // results = this.service.fetchResults('alice')
+  // cache: any
 
-  results: AlbumView[] = []
-  message = ''
-  query = '';
+  results = this.service.resultsChange
+  query = this.service.queryChange
 
-  sub = new Subject()
+  constructor(private service: MusicSearchService) { }
 
-  constructor(
-    private service: MusicSearchService) { }
-
-  ngOnInit(): void {
-    this.service.resultsChange.pipe(
-      // take(1)
-      // takeWhile(fn)
-      takeUntil(this.sub)
-    ).subscribe({
-      next: results => this.results = results,
-    })
-
-    this.service.queryChange.pipe(
-      takeUntil(this.sub)
-    ).subscribe({
-      next: query => this.query = query,
-    })
-
-  }
+  ngOnInit(): void { }
 
   searchAlbums(event: SearchFormEvent) {
-    this.service.searchAlbums(event.query)
+    // this.service.searchAlbums(event.query)
+
+
+    // Convert Unicast to Multicast
+    this.results = this.service.fetchResults(event.query).pipe(
+      multicast(new Subject())
+    )
+
   }
 
-  ngOnDestroy(): void {
-    this.sub.next()
+  connect() {
+
+    ; (this.results as ConnectableObservable<AlbumView[]>).connect()
   }
+
 }
