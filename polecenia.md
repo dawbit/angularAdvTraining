@@ -254,3 +254,30 @@ ng g m core/fixtures -m app
 ## Services
 
 ng g s core/api/music-search
+
+## INterceptors
+ng g interceptor core/interceptors/error
+CREATE apps/waskoadv/src/app/core/interceptors/error.interceptor.spec.ts
+CREATE apps/waskoadv/src/app/core/interceptors/error.interceptor.ts
+
+
+## Rx Operators
+https://rxmarbles.com/#pluck
+https://rxjs.dev/operator-decision-tree
+https://rxjs.dev/api/operators/map
+
+https://rxviz.com/examples/mouse-move
+https://www.learnrxjs.io/learn-rxjs/operators
+
+
+## Validation and Transformation
+https://github.com/colinhacks/zod
+
+https://github.com/typestack/class-transformer#working-with-nested-objects
+https://github.com/typestack/class-validator
+
+https://github.com/gvergnaud/ts-pattern
+
+## GLobal search results
+
+ng g c shared/containers/recent-searches --export 
